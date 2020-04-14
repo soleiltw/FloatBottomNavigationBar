@@ -70,33 +70,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget get bottomNavigationBar {
-    const double _iconSize = 36;
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(_iconSize)),
-      child: FloatButtonNavigationBar(
-        selectIndex: _selectedIndex,
-        selectedColor: Colors.blueAccent,
-        unselectedColor: Colors.blueGrey[300],
-        items: <FloatBottonBarButtonItem>[
-          FloatBottonBarButtonItem(
-            iconData: Icons.home,
-          ),
-          FloatBottonBarButtonItem(
-            iconData: Icons.search,
-          ),
-          FloatBottonBarButtonItem(
-            iconData: Icons.message,
-          ),
-          FloatBottonBarButtonItem(
-            iconData: Icons.person,
-          ),
-        ],
-        onTap: (value) {
-          setState(() {
-            _selectedIndex = value;
-          });
-        },
-      ),
+    return FloatButtonNavigationBar(
+      selectIndex: _selectedIndex,
+      selectedColor: Colors.blueAccent,
+      unselectedColor: Colors.blueGrey[300],
+      items: <FloatBottonBarButtonItem>[
+        FloatBottonBarButtonItem(
+          iconData: Icons.home,
+        ),
+        FloatBottonBarButtonItem(
+          iconData: Icons.search,
+        ),
+        FloatBottonBarButtonItem(
+          iconData: Icons.message,
+        ),
+        FloatBottonBarButtonItem(
+          iconData: Icons.person,
+        ),
+      ],
+      onTap: (value) {
+        setState(() {
+          _selectedIndex = value;
+        });
+      },
     );
   }
 }

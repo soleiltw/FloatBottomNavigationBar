@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../layout.dart';
 
-class FloatButtonNavigationBar extends StatefulWidget {
+class FloatButtonNavigationBar extends StatelessWidget {
   final List<FloatBottonBarButtonItem> items;
   final FloatBottonBarTapCallback onTap;
   final int selectIndex;
@@ -17,28 +17,19 @@ class FloatButtonNavigationBar extends StatefulWidget {
       this.unselectedColor})
       : super(key: key);
 
-  @override
-  _FloatButtonNavigationBarState createState() =>
-      _FloatButtonNavigationBarState();
-}
-
-class _FloatButtonNavigationBarState extends State<FloatButtonNavigationBar> {
-  @override
   Widget build(BuildContext context) {
     const double _iconSize = 44;
     int index = 0;
     List<FloatBottonBarButton> _buttons = List();
-    for (final _buttonItem in widget.items) {
+    for (final _buttonItem in this.items) {
       _buttons.add(FloatBottonBarButton(
-        color: (index == this.widget.selectIndex)
-            ? this.widget.selectedColor
-            : this.widget.unselectedColor,
+        color: (index == this.selectIndex)
+            ? this.selectedColor
+            : this.unselectedColor,
         tapCallBack: (selectIndex) {
-          setState(() {
-            if (this.widget.onTap != null) {
-              this.widget.onTap(selectIndex);
-            }
-          });
+          if (this.onTap != null) {
+            this.onTap(selectIndex);
+          }
         },
         index: index,
         iconData: _buttonItem.iconData,
