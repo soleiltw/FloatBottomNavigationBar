@@ -20,20 +20,24 @@ class FloatButtonNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     const double _iconSize = 44;
     int index = 0;
-    List<FloatBottonBarButton> _buttons = List();
+    List<Widget> _buttons = List();
     for (final _buttonItem in this.items) {
-      _buttons.add(FloatBottonBarButton(
-        color: (index == this.selectIndex)
-            ? this.selectedColor
-            : this.unselectedColor,
-        tapCallBack: (selectIndex) {
-          if (this.onTap != null) {
-            this.onTap(selectIndex);
-          }
-        },
-        index: index,
-        iconData: _buttonItem.iconData,
-      ));
+      if (_buttonItem is FloatButtonBarWidgetItem) {
+        _buttons.add(_buttonItem.customWidget);
+      } else {
+        _buttons.add(FloatBottonBarButton(
+          color: (index == this.selectIndex)
+              ? this.selectedColor
+              : this.unselectedColor,
+          tapCallBack: (selectIndex) {
+            if (this.onTap != null) {
+              this.onTap(selectIndex);
+            }
+          },
+          index: index,
+          iconData: _buttonItem.iconData,
+        ));
+      }
 
       index++;
     }
@@ -56,8 +60,13 @@ typedef void FloatBottonBarTapCallback(int selectIndex);
 
 class FloatBottonBarButtonItem {
   final IconData iconData;
-
   FloatBottonBarButtonItem({this.iconData});
+}
+
+class FloatButtonBarWidgetItem extends FloatBottonBarButtonItem {
+  final Widget customWidget;
+
+  FloatButtonBarWidgetItem({this.customWidget});
 }
 
 class FloatBottonBarButton extends StatelessWidget {
